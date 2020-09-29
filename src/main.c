@@ -51,7 +51,11 @@ main(void)
 
   printf("OpenGL Version %d.%d loaded.\n", GLVersion.major, GLVersion.minor);
 
-  res_load_obj("temp_file_name.obj");
+  char * cube = res_load_obj("res/cube.obj");
+  char * suzanne = res_load_obj("res/suzanne.obj");
+
+  printf("Cube: %s\n", cube);
+  printf("Suzanne: %s\n", suzanne);
 
   while (!glfwWindowShouldClose(window)) {
     glfwPollEvents();
