@@ -2,12 +2,12 @@
 DEPS := \
 	glfw/src/libglfw3.a \
 	glad/libglad.a \
+	cglm/libcglm.a \
 
 
 INCLUDES := \
 	glfw/include \
 	glad/include \
-	glfw/deps \
 
 
 DIR_BIN := bin
@@ -30,7 +30,7 @@ FLAGS = $(filter-out -lglfw3,\
 
 
 ${DIR_BIN}/% : ${DIR_SRC}/%.c | ${DIR_BIN}
-	gcc ${FLAGS} ${INCLUDES} $(filter %.c %.h %.a,$^) -o $@
+	gcc ${INCLUDES} $(filter %.c %.h %.a,$^) -o $@ ${FLAGS}
 
 
 ${BINS} : ${DEPS} Makefile
@@ -46,6 +46,9 @@ glad/%:
 	cd glad && git checkout v0.1.33 && cmake . && make
 
 
+cglm/%:
+	git clone https://github.com/recp/cglm
+	cd cglm && git checkout v0.7.8 && cmake -DCGLM_STATIC=ON . && make
 
 
 ${DIR_BIN} :
