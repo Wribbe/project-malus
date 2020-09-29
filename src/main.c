@@ -51,11 +51,12 @@ main(void)
 
   printf("OpenGL Version %d.%d loaded.\n", GLVersion.major, GLVersion.minor);
 
+  res_load_obj("temp_file_name.obj");
+
   while (!glfwWindowShouldClose(window)) {
     glfwPollEvents();
     render();
     glfwSwapBuffers(window);
   }
 
-  res_load_obj("temp_file_name.obj");
 }

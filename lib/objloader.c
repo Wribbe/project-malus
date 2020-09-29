@@ -3,5 +3,6 @@
 char *
 res_load_obj(const char * filename)
 {
-  printf("%s\n", filename);
+  char * data = file_read(filename);
+  printf("Loaded object from: %s\n", filename);
 }
