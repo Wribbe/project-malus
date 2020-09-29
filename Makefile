@@ -8,12 +8,14 @@ DEPS := \
 INCLUDES := \
 	glfw/include \
 	glad/include \
+	lib \
 
 
 DIR_BIN := bin
 DIR_SRC := src
 
 
+LIB_SRC := $(wildcard lib/*.c)
 BINS := $(foreach p,$(wildcard ${DIR_SRC}/*.c),${DIR_BIN}/$(notdir ${p:.c=}))
 
 
@@ -30,10 +32,10 @@ FLAGS = $(filter-out -lglfw3,\
 
 
 ${DIR_BIN}/% : ${DIR_SRC}/%.c | ${DIR_BIN}
-	gcc ${INCLUDES} $(filter %.c %.h %.a,$^) -o $@ ${FLAGS}
+	gcc ${INCLUDES} $(filter %.c %.a,$^) -o $@ ${FLAGS}
 
 
-${BINS} : ${DEPS} Makefile
+${BINS} : ${DEPS} Makefile ${LIB_SRC}
 
 
 glfw/%:
