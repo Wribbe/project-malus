@@ -33,13 +33,13 @@ ret_data_init(size_t size_data)
   size_t size_part = size_data/4;
 
   ret_data.v_start = ret_data.data;
-  ret_data.v_end = ret_data.data+size_part;
+  ret_data.v_end = ret_data.data+size_part/sizeof(GLfloat*);
 
   ret_data.vt_start = ret_data.v_end+1;
-  ret_data.vt_end = ret_data.vt_start+size_part;
+  ret_data.vt_end = ret_data.vt_start+size_part/sizeof(GLfloat*);
 
   ret_data.v_start = ret_data.vt_end+1;
-  ret_data.v_end = ret_data.v_start+size_part;
+  ret_data.v_end = ret_data.v_start+size_part/sizeof(GLfloat*);
 
   ret_data.f_start = (GLuint *)(ret_data.v_end+1);
   ret_data.f_end = ret_data.data+size_data;
