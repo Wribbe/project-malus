@@ -42,10 +42,10 @@ ret_data_init(size_t size_data)
 {
   size_t size_part = size_data/4;
   struct ret_data ret_data = {
-    .v = malloc(size_part),
-    .vt = malloc(size_part),
-    .vn = malloc(size_part),
-    .f = malloc(size_part),
+    .v = malloc(size_part*sizeof(GLfloat)),
+    .vt = malloc(size_part*sizeof(GLfloat)),
+    .vn = malloc(size_part*sizeof(GLfloat)),
+    .f = malloc(size_part*sizeof(GLuint)),
     .size.v = size_part,
     .size.vt = size_part,
     .size.vn = size_part,
