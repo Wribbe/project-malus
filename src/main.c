@@ -46,7 +46,7 @@ main(void)
   printf("OpenGL Version %d.%d loaded.\n", GLVersion.major, GLVersion.minor);
 
   struct renderable cube = res_load_obj("res/cube.obj");
-  struct renderable suzanne = res_load_obj("res/suzanne.obj");
+//  struct renderable suzanne = res_load_obj("res/suzanne.obj");
 
   while (!glfwWindowShouldClose(window)) {
     glfwPollEvents();
