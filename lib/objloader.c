@@ -15,37 +15,46 @@ newline(const char * c) {
 
 
 struct ret_data {
-  GLfloat * v_start, * v_end;
-  GLfloat * vt_start, * vt_end;
-  GLfloat * vn_start, * vn_end;
-  GLuint * f_start, * f_end;
-  size_t size_data;
-  void * data;
+  GLfloat * v;
+  GLfloat * vt;
+  GLfloat * vn;
+  GLuint * f;
+  struct {
+    size_t v;
+    size_t vt;
+    size_t vn;
+    size_t f;
+  } num;
+  struct {
+    size_t v;
+    size_t vt;
+    size_t vn;
+    size_t f;
+  } size;
 };
+
+
+enum obj_type { V, VT, VN, F };
 
 
 struct ret_data
 ret_data_init(size_t size_data)
 {
-  struct ret_data ret_data = {
-    .data = malloc(size_data)
-  };
   size_t size_part = size_data/4;
-
-  ret_data.v_start = ret_data.data;
-  ret_data.v_end = ret_data.data+size_part/sizeof(GLfloat*);
-
-  ret_data.vt_start = ret_data.v_end+1;
-  ret_data.vt_end = ret_data.vt_start+size_part/sizeof(GLfloat*);
-
-  ret_data.v_start = ret_data.vt_end+1;
-  ret_data.v_end = ret_data.v_start+size_part/sizeof(GLfloat*);
-
-  ret_data.f_start = (GLuint *)(ret_data.v_end+1);
-  ret_data.f_end = ret_data.data+size_data;
+  struct ret_data ret_data = {
+    .v = malloc(size_part),
+    .vt = malloc(size_part),
+    .vn = malloc(size_part),
+    .f = malloc(size_part),
+    .size.v = size_part,
+    .size.vt = size_part,
+    .size.vn = size_part,
+    .size.f = size_part
+  };
 
   return ret_data;
 }
+
 
 
 void
@@ -57,28 +66,52 @@ ret_data_finalize(struct ret_data * ret_data)
 inline static char *
 parse_texture_coords(char * c, struct ret_data * ret_data)
 {
-
+  c += 2;
+  GLfloat data[2] = {0};
+  sscanf(c, "%f %f", &data[0], &data[1]);
+  while(!newline(c)) {
+    c++;
+  }
+  return c+1;
 }
 
 
 inline static char *
 parse_vertex(char * c, struct ret_data * ret_data)
 {
-
+  c += 1;
+  GLfloat data[3] = {0};
+  sscanf(c, "%f %f %f", &data[0], &data[1], &data[2]);
+  while(!newline(c)) {
+    c++;
+  }
+  return c+1;
 }
 
 
 inline static char *
 parse_vertex_normal(char * c, struct ret_data * ret_data)
 {
-
+  c += 2;
+  GLfloat data[3] = {0};
+  sscanf(c, "%f %f %f", &data[0], &data[1], &data[2]);
+  while(!newline(c)) {
+    c++;
+  }
+  return c+1;
 }
 
 
 inline static char *
 parse_face(char * c, struct ret_data * ret_data)
 {
-
+  c += 1;
+  GLuint data[3] = {0};
+  sscanf(c, "%u/%u/%u", &data[0], &data[1], &data[2]);
+  while(!newline(c)) {
+    c++;
+  }
+  return c+1;
 }
 
 

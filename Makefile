@@ -29,6 +29,7 @@ FLAGS = $(filter-out -lglfw3,\
 	$(shell pkg-config --cflags ./glfw/src/glfw3.pc) \
 	$(shell pkg-config --static --libs ./glfw/src/glfw3.pc) \
 )
+FLAGS := ${FLAGS} -Wall -pedantic -g
 
 
 ${DIR_BIN}/% : ${DIR_SRC}/%.c | ${DIR_BIN}
