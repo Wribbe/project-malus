@@ -72,7 +72,11 @@ parse_texture_coords(char * c, struct ret_data * ret_data)
   while(!newline(c)) {
     c++;
   }
-  return c+1;
+  for (size_t i=0; i<2; i++) {
+    *(ret_data->vt+ret_data->num.vt) = data[i];
+    ret_data->num.vt++;
+  }
+  return c;
 }
 
 
@@ -85,7 +89,11 @@ parse_vertex(char * c, struct ret_data * ret_data)
   while(!newline(c)) {
     c++;
   }
-  return c+1;
+  for (size_t i=0; i<3; i++) {
+    *(ret_data->v+ret_data->num.v) = data[i];
+    ret_data->num.v++;
+  }
+  return c;
 }
 
 
@@ -98,7 +106,11 @@ parse_vertex_normal(char * c, struct ret_data * ret_data)
   while(!newline(c)) {
     c++;
   }
-  return c+1;
+  for (size_t i=0; i<3; i++) {
+    *(ret_data->vn+ret_data->num.vn) = data[i];
+    ret_data->num.vn++;
+  }
+  return c;
 }
 
 
@@ -111,7 +123,11 @@ parse_face(char * c, struct ret_data * ret_data)
   while(!newline(c)) {
     c++;
   }
-  return c+1;
+  for (size_t i=0; i<3; i++) {
+    *(ret_data->f+ret_data->num.f) = data[i];
+    ret_data->num.f++;
+  }
+  return c;
 }
 
 
