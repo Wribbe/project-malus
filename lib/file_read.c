@@ -1,7 +1,7 @@
 #include "utils.h"
 
 char *
-file_read(const char * filename)
+file_read(const char * filename, size_t * p_size_data)
 {
   FILE * fh = fopen(filename, "r");
   if (fh == NULL) {
@@ -26,6 +26,10 @@ file_read(const char * filename)
     if (size_read == size_data) {
       break;
     }
+  }
+
+  if (p_size_data != NULL) {
+    *p_size_data = size_data;
   }
 
   fclose(fh);

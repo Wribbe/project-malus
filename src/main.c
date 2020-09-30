@@ -1,9 +1,3 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
-#include <stdlib.h>
-#include <stdio.h>
-
 #include "utils.h"
 
 void
@@ -51,11 +45,8 @@ main(void)
 
   printf("OpenGL Version %d.%d loaded.\n", GLVersion.major, GLVersion.minor);
 
-  char * cube = res_load_obj("res/cube.obj");
-  char * suzanne = res_load_obj("res/suzanne.obj");
-
-  printf("Cube: %s\n", cube);
-  printf("Suzanne: %s\n", suzanne);
+  struct renderable cube = res_load_obj("res/cube.obj");
+  struct renderable suzanne = res_load_obj("res/suzanne.obj");
 
   while (!glfwWindowShouldClose(window)) {
     glfwPollEvents();
